@@ -1,0 +1,37 @@
+{% extends "base.html" %} {% block title %}My Book List{% endblock %} {% block content %}
+<div class="book-item-add">
+    <h1 class="welcome-title">Hello {{username |upper}}! <br>Here you can make your own fav books list ! :)</h1>
+    <form action="/create" method='POST'>
+        <div class="input-book">
+            <input type='text' class="form-control" name='title' placeholder="Insert u FavBooks here..." autofocus='true' required/>
+            <input type='text' class="form-control" name='author' placeholder="Inser the author of the book here..." required/>
+            <button type='submit' class="btn btn-outline-primary btn-sm"><span class="material-icons">add</span>
+        </button>
+        </div>
+    </form>
+</div>
+<div class="book-list-container">
+    {%for book in book_list %}
+    <div class="book-list-item">
+        <div class="book-list-info">
+
+            <form action="/update/{{book.id}}" method="POST" id="form-book-{{book.id}}" class="form-show-book">
+                <input type="text" class="form-control" name="new_title" placeholder="Put here the new book title!" required value="{{book.title}}" />
+                <input type="text" class="form-control" name="new_author" placeholder="Change Author here!" required value="{{book.author}}" />
+                <button type="submit" class="btn btn-outline-primary btn-sm">Update Book Info</button>
+            </form>
+
+            <!-- <form action="/update/{{book.id}}" method="POST" id="form-book-{{book.id}}" class="form-hide">
+                <input type="text" class="form-control" name="new_author" placeholder="Change Author here!" required value="{{book.author}}" />
+                <button type="submit" class="btn btn-outline-primary btn-sm">Update Author</button>
+            </form> -->
+            <div class="form-buttons">{% if book.read%}
+                <button onclick="document.location.replace('/change-status/{{book.id}}')" class="btn btn-outline-primary btn-sm">Read</button> {% else %}
+                <button onclick="document.location.replace('/change-status/{{book.id}}')" class="btn btn-outline-primary btn-sm">Unread</button> {% endif %}
+                <button class="material-icons cursor-click btn btn-outline-primary btn-sm " onclick='document.location.replace("/delete/{{book.id}} ")'>delete </button>
+            </div>
+        </div>
+
+    </div>
+    {%endfor%}
+</div> {% endblock %}

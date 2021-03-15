@@ -1,0 +1,20 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-change {
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0px 3px 6px #888;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.btn.btn-outline-primary.btn-sm {
+    width: 100%;
+}
+
+.text-label {
+    align: center;
+}

@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% block title %}Settings Account{% endblock %} {% block content %}
+
+<div class="container">
+    <h1 class="text-center">Here u can change ur Username & Password</h1>
+    <form action='/changeusername' method='POST' class="form-change">
+        <p align="center">Change Username</p>
+        <div class="form-change-username">
+            <input type="text" class="form-control" id="newusername" name="newusername" placeholder="Put ur new username here." />
+        </div>
+        <br>
+        <button type="submit" class="btn btn-outline-primary btn-sm">Change Username</button>
+    </form>
+
+    <form action='/changepassword' method='POST' class="form-change">
+        <p align="center">Change Password</p>
+        <div class=" form-change-password ">
+            <input type="password " class="form-control" id="oldpassword " name="oldpassword " placeholder="Put the old password please here. " />
+        </div>
+        <div class="form-change-password ">
+            <input type="password " class="form-control" id="newpassword " name="newpassword " placeholder="Put the new password please here. " />
+        </div>
+        <div class="form-change-password ">
+            <input type="password " class="form-control" id="confirmpassword " name="confirmpassword " placeholder="Confirm the new password please here. " />
+        </div>
+        <br>
+        <button type="submit " class="btn btn-outline-primary btn-sm">Change Password</button>
+    </form>
+</div>
+{% endblock %}

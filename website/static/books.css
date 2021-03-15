@@ -1,0 +1,73 @@
+body {
+    background-color: #f5f5f5;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.text-center {
+    margin-bottom: 35px;
+}
+
+.book-item-add {
+    text-align: center;
+    background-color: #fff;
+    margin-bottom: 50px;
+    box-shadow: 0px 6px 8px #888;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.book-list-item {
+    text-align: center;
+    background-color: #fff;
+    margin-bottom: 50px;
+    box-shadow: 4px 6px 13px #888;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.input-book,
+.book-list-info,
+.book-list-container,
+.welcome-title {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 35px;
+}
+
+.form-control {
+    margin-bottom: 10px !important;
+}
+
+.btn.btn-outline-primary.btn-sm {
+    align: center !important;
+}
+
+.form-show-book {
+    display: flex;
+    flex-direction: column;
+}
+
+.book-read {
+    align-self: center;
+}
+
+.book-option {
+    color: #007bff;
+    text-align: center;
+}
+
+.form-buttons {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar-nav2 {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}

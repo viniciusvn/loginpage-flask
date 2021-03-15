@@ -16,14 +16,14 @@ def create():
     db.session.add(new_book)
     db.session.commit()
 
-    return redirect(url_for('views.home'))
+    return redirect(url_for('views.books'))
 
 @auth.route('/delete/<int:book_id>')
 def delete(book_id):
     book_delete = Books.query.filter_by(id = book_id).first()
     db.session.delete(book_delete)
     db.session.commit()
-    return redirect(url_for('views.home'))
+    return redirect(url_for('views.books'))
 
 @auth.route('/update/<int:book_id>', methods=['POST'])
 def update_book(book_id):
@@ -33,7 +33,7 @@ def update_book(book_id):
     book_update.title = new_title
     book_update.author = new_author
     db.session.commit()
-    return redirect(url_for('views.home'))
+    return redirect(url_for('views.books'))
 
 
 @auth.route('/change-status/<int:book_id>')
@@ -41,7 +41,7 @@ def change_status(book_id):
     book_status = Books.query.filter_by(id=book_id).first()
     book_status.read = not book_status.read
     db.session.commit()
-    return redirect(url_for('views.home'))
+    return redirect(url_for('views.books'))
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -101,6 +101,47 @@ def signup():
             return redirect(url_for('views.home'))
 
     return render_template("sign_up.html", user=current_user)
-            
+
+@auth.route('/changeusername', methods=['POST'])
+def changeusername():
+    if request.method == 'POST':
+        newusername = request.form.get('newusername')
+        changeusername = User.query.filter_by(id = current_user.id).first()
+        changeusername.username = newusername
+        db.session.commit()
+        flash('The Username has change successful', category='sucess')
+        return redirect(url_for('auth.settings'))
+
+
+    return render_Template("settings.html", user=current_user)
+@auth.route('/changepassword', methods=['POST'])
+def changepassword():
+    if request.method == 'POST':
+        oldpassword = request.form.get('oldpassword')
+        newpassword = request.form.get('newpassword')
+        confirmpassword = request.form.get('confirmpassword')
+        
+        if newpassword == oldpassword:
+            flash('The password can not be equal to the current password!', category='error')
+            return redirect(url_for('auth.settings'))
+        elif newpassword != confirmpassword:
+            flash('The new password and confirm password is not equal!')
+            return redirect(url_for('auth.settings'))
+        elif newpassword == confirmpassword:
+            flash('The new password has change!')
+            changepassword = User.query.filter_by(id = current_user.id).first()
+            newpasswordhash = generate_password_hash(newpassword, method='sha256')
+            changepassword.password = newpasswordhash
+            db.session.commit()
+            flash('The change password has successful', category='success')
+            return redirect(url_for('auth.settings'))
+
+    return render_template("settings.html", user=current_user)
+
+@auth.route('/settings', methods=['GET', 'POST'])
+@login_required
+def settings():
+    return render_template("settings.html", user =current_user)
+
 
     
